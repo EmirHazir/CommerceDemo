@@ -1,0 +1,42 @@
+﻿@model UI.Models.ProductVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Ürün Açıklamas</th>
+                <th>Ürün Fiyat</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<product-list-pager current-page="@Model.CurrentPage"
+                    current-category="@Model.CurrentCategory"
+                    page-size="@Model.PageSize"
+                    page-count="@Model.PageCount">
+</product-list-pager>
